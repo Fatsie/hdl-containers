@@ -1,0 +1,242 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg height='348pt' preserveAspectRatio='xMidYMid meet' viewBox='0.00 0.00 533.00 348.00' width='533pt' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'>
+<g class='graph' id='graph0' transform='scale(1 1) rotate(0) translate(4 344)'>
+<title>G</title>
+<polygon fill='white' points='-4,4 -4,-344 529,-344 529,4 -4,4' stroke='transparent'/>
+<g class='cluster' id='clust7'>
+<title>cluster_gtkwave</title>
+<polygon fill='none' points='8,-8 8,-276 204,-276 204,-8 8,-8' stroke='black'/>
+</g>
+<g class='cluster' id='clust9'>
+<title>cluster_verilator</title>
+<polygon fill='none' points='212,-8 212,-276 517,-276 517,-8 212,-8' stroke='black'/>
+</g>
+
+<g class='node' id='node1'>
+<title>d_gtkwave</title>
+<polygon fill='none' points='141.5,-196 70.5,-196 70.5,-160 147.5,-160 147.5,-190 141.5,-196' stroke='dodgerblue'/>
+<polyline fill='none' points='141.5,-196 141.5,-190 ' stroke='dodgerblue'/>
+<polyline fill='none' points='147.5,-190 141.5,-190 ' stroke='dodgerblue'/>
+<text fill='dodgerblue' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='109' y='-174.3'>gtkwave</text>
+</g>
+
+<g class='node' id='node6'>
+<title>pkg:gtkwave</title>
+<path d='M142.5,-120.73C142.5,-122.53 118.52,-124 89,-124 59.48,-124 35.5,-122.53 35.5,-120.73 35.5,-120.73 35.5,-91.27 35.5,-91.27 35.5,-89.47 59.48,-88 89,-88 118.52,-88 142.5,-89.47 142.5,-91.27 142.5,-91.27 142.5,-120.73 142.5,-120.73' fill='none' stroke='mediumblue'/>
+<path d='M142.5,-120.73C142.5,-118.92 118.52,-117.45 89,-117.45 59.48,-117.45 35.5,-118.92 35.5,-120.73' fill='none' stroke='mediumblue'/>
+<text fill='mediumblue' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='89' y='-102.3'>pkg:gtkwave</text>
+</g>
+
+<g class='edge' id='edge1'>
+<title>d_gtkwave&#45;&gt;pkg:gtkwave</title>
+<path d='M104.06,-159.7C101.83,-151.9 99.15,-142.51 96.67,-133.83' fill='none' stroke='black' stroke-dasharray='1,5'/>
+<polygon fill='black' points='100,-132.76 93.89,-124.1 93.27,-134.68 100,-132.76' stroke='black'/>
+</g>
+
+<g class='node' id='node2'>
+<title>d_verilator</title>
+<polygon fill='none' points='387,-196 315,-196 315,-160 393,-160 393,-190 387,-196' stroke='dodgerblue'/>
+<polyline fill='none' points='387,-196 387,-190 ' stroke='dodgerblue'/>
+<polyline fill='none' points='393,-190 387,-190 ' stroke='dodgerblue'/>
+<text fill='dodgerblue' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='354' y='-174.3'>verilator</text>
+</g>
+
+<g class='node' id='node5'>
+<title>verilator</title>
+<path d='M464,-120.73C464,-122.53 446.52,-124 425,-124 403.48,-124 386,-122.53 386,-120.73 386,-120.73 386,-91.27 386,-91.27 386,-89.47 403.48,-88 425,-88 446.52,-88 464,-89.47 464,-91.27 464,-91.27 464,-120.73 464,-120.73' fill='none' stroke='limegreen'/>
+<path d='M464,-120.73C464,-118.92 446.52,-117.45 425,-117.45 403.48,-117.45 386,-118.92 386,-120.73' fill='none' stroke='limegreen'/>
+<text fill='limegreen' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='425' y='-102.3'>verilator</text>
+</g>
+
+<g class='edge' id='edge3'>
+<title>d_verilator&#45;&gt;verilator</title>
+<path d='M371.55,-159.7C380.23,-151.14 390.86,-140.66 400.35,-131.3' fill='none' stroke='black' stroke-dasharray='1,5'/>
+<polygon fill='black' points='402.99,-133.62 407.65,-124.1 398.07,-128.63 402.99,-133.62' stroke='black'/>
+</g>
+
+<g class='node' id='node7'>
+<title>pkg:verilator</title>
+<path d='M342.5,-120.73C342.5,-122.53 318.07,-124 288,-124 257.93,-124 233.5,-122.53 233.5,-120.73 233.5,-120.73 233.5,-91.27 233.5,-91.27 233.5,-89.47 257.93,-88 288,-88 318.07,-88 342.5,-89.47 342.5,-91.27 342.5,-91.27 342.5,-120.73 342.5,-120.73' fill='none' stroke='mediumblue'/>
+<path d='M342.5,-120.73C342.5,-118.92 318.07,-117.45 288,-117.45 257.93,-117.45 233.5,-118.92 233.5,-120.73' fill='none' stroke='mediumblue'/>
+<text fill='mediumblue' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='288' y='-102.3'>pkg:verilator</text>
+</g>
+
+<g class='edge' id='edge4'>
+<title>d_verilator&#45;&gt;pkg:verilator</title>
+<path d='M337.69,-159.7C329.69,-151.22 319.93,-140.86 311.18,-131.58' fill='none' stroke='black' stroke-dasharray='1,5'/>
+<polygon fill='black' points='313.53,-128.98 304.13,-124.1 308.44,-133.78 313.53,-128.98' stroke='black'/>
+</g>
+
+<g class='node' id='node3'>
+<title>build:build</title>
+<path d='M298.5,-336.73C298.5,-338.53 277.66,-340 252,-340 226.34,-340 205.5,-338.53 205.5,-336.73 205.5,-336.73 205.5,-307.27 205.5,-307.27 205.5,-305.47 226.34,-304 252,-304 277.66,-304 298.5,-305.47 298.5,-307.27 298.5,-307.27 298.5,-336.73 298.5,-336.73' fill='none' stroke='black'/>
+<path d='M298.5,-336.73C298.5,-334.92 277.66,-333.45 252,-333.45 226.34,-333.45 205.5,-334.92 205.5,-336.73' fill='none' stroke='black'/>
+<text font-family='Times,serif' font-size='14.00' text-anchor='middle' x='252' y='-318.3'>build:build</text>
+</g>
+
+<g class='node' id='node9'>
+<title>p_gtkwave_build:build</title>
+<path d='M196.5,-264.73C196.5,-266.53 175.66,-268 150,-268 124.34,-268 103.5,-266.53 103.5,-264.73 103.5,-264.73 103.5,-235.27 103.5,-235.27 103.5,-233.47 124.34,-232 150,-232 175.66,-232 196.5,-233.47 196.5,-235.27 196.5,-235.27 196.5,-264.73 196.5,-264.73' fill='none' stroke='grey'/>
+<path d='M196.5,-264.73C196.5,-262.92 175.66,-261.45 150,-261.45 124.34,-261.45 103.5,-262.92 103.5,-264.73' fill='none' stroke='grey'/>
+<text fill='grey' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='150' y='-246.3'>build:build</text>
+</g>
+
+<g class='edge' id='edge7'>
+<title>build:build&#45;&gt;p_gtkwave_build:build</title>
+<path d='M227.05,-303.88C213.96,-294.89 197.74,-283.76 183.56,-274.03' fill='none' stroke='black'/>
+<polygon fill='black' points='185.27,-270.96 175.05,-268.19 181.31,-276.73 185.27,-270.96' stroke='black'/>
+</g>
+
+<g class='node' id='node12'>
+<title>p_verilator_build:build</title>
+<path d='M400.5,-264.73C400.5,-266.53 379.66,-268 354,-268 328.34,-268 307.5,-266.53 307.5,-264.73 307.5,-264.73 307.5,-235.27 307.5,-235.27 307.5,-233.47 328.34,-232 354,-232 379.66,-232 400.5,-233.47 400.5,-235.27 400.5,-235.27 400.5,-264.73 400.5,-264.73' fill='none' stroke='grey'/>
+<path d='M400.5,-264.73C400.5,-262.92 379.66,-261.45 354,-261.45 328.34,-261.45 307.5,-262.92 307.5,-264.73' fill='none' stroke='grey'/>
+<text fill='grey' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='354' y='-246.3'>build:build</text>
+</g>
+
+<g class='edge' id='edge11'>
+<title>build:build&#45;&gt;p_verilator_build:build</title>
+<path d='M276.95,-303.88C290.04,-294.89 306.26,-283.76 320.44,-274.03' fill='none' stroke='black'/>
+<polygon fill='black' points='322.69,-276.73 328.95,-268.19 318.73,-270.96 322.69,-276.73' stroke='black'/>
+</g>
+
+<g class='node' id='node4'>
+<title>build:base</title>
+<path d='M509,-336.73C509,-338.53 488.83,-340 464,-340 439.17,-340 419,-338.53 419,-336.73 419,-336.73 419,-307.27 419,-307.27 419,-305.47 439.17,-304 464,-304 488.83,-304 509,-305.47 509,-307.27 509,-307.27 509,-336.73 509,-336.73' fill='none' stroke='black'/>
+<path d='M509,-336.73C509,-334.92 488.83,-333.45 464,-333.45 439.17,-333.45 419,-334.92 419,-336.73' fill='none' stroke='black'/>
+<text font-family='Times,serif' font-size='14.00' text-anchor='middle' x='464' y='-318.3'>build:base</text>
+</g>
+
+<g class='node' id='node13'>
+<title>p_verilator_build:base</title>
+<path d='M509,-264.73C509,-266.53 488.83,-268 464,-268 439.17,-268 419,-266.53 419,-264.73 419,-264.73 419,-235.27 419,-235.27 419,-233.47 439.17,-232 464,-232 488.83,-232 509,-233.47 509,-235.27 509,-235.27 509,-264.73 509,-264.73' fill='none' stroke='grey'/>
+<path d='M509,-264.73C509,-262.92 488.83,-261.45 464,-261.45 439.17,-261.45 419,-262.92 419,-264.73' fill='none' stroke='grey'/>
+<text fill='grey' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='464' y='-246.3'>build:base</text>
+</g>
+
+<g class='edge' id='edge13'>
+<title>build:base&#45;&gt;p_verilator_build:base</title>
+<path d='M464,-303.7C464,-295.98 464,-286.71 464,-278.11' fill='none' stroke='black'/>
+<polygon fill='black' points='467.5,-278.1 464,-268.1 460.5,-278.1 467.5,-278.1' stroke='black'/>
+</g>
+
+<g class='node' id='node15'>
+<title>t_verilator</title>
+<polygon fill='none' points='464,-52 461,-56 440,-56 437,-52 386,-52 386,-16 464,-16 464,-52' stroke='red'/>
+<text fill='red' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='425' y='-30.3'>verilator</text>
+</g>
+
+<g class='edge' id='edge5'>
+<title>verilator&#45;&gt;t_verilator</title>
+<path d='M425,-87.7C425,-79.98 425,-70.71 425,-62.11' fill='none' stroke='black'/>
+<polygon fill='black' points='428.5,-62.1 425,-52.1 421.5,-62.1 428.5,-62.1' stroke='black'/>
+</g>
+
+<g class='node' id='node11'>
+<title>t_pkg:gtkwave</title>
+<polygon fill='none' points='142.5,-52 139.5,-56 118.5,-56 115.5,-52 35.5,-52 35.5,-16 142.5,-16 142.5,-52' stroke='red'/>
+<text fill='red' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='89' y='-30.3'>gtkwave.pkg</text>
+</g>
+
+<g class='edge' id='edge2'>
+<title>pkg:gtkwave&#45;&gt;t_pkg:gtkwave</title>
+<path d='M89,-87.7C89,-79.98 89,-70.71 89,-62.11' fill='none' stroke='black'/>
+<polygon fill='black' points='92.5,-62.1 89,-52.1 85.5,-62.1 92.5,-62.1' stroke='black'/>
+</g>
+
+<g class='node' id='node16'>
+<title>t_pkg:verilator</title>
+<polygon fill='none' points='341.5,-52 338.5,-56 317.5,-56 314.5,-52 234.5,-52 234.5,-16 341.5,-16 341.5,-52' stroke='red'/>
+<text fill='red' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='288' y='-30.3'>verilator.pkg</text>
+</g>
+
+<g class='edge' id='edge6'>
+<title>pkg:verilator&#45;&gt;t_pkg:verilator</title>
+<path d='M288,-87.7C288,-79.98 288,-70.71 288,-62.11' fill='none' stroke='black'/>
+<polygon fill='black' points='291.5,-62.1 288,-52.1 284.5,-62.1 291.5,-62.1' stroke='black'/>
+</g>
+
+<g class='node' id='node8'>
+<title>scratch</title>
+<path d='M187.5,-336.73C187.5,-338.53 172.04,-340 153,-340 133.96,-340 118.5,-338.53 118.5,-336.73 118.5,-336.73 118.5,-307.27 118.5,-307.27 118.5,-305.47 133.96,-304 153,-304 172.04,-304 187.5,-305.47 187.5,-307.27 187.5,-307.27 187.5,-336.73 187.5,-336.73' fill='none' stroke='orange'/>
+<path d='M187.5,-336.73C187.5,-334.92 172.04,-333.45 153,-333.45 133.96,-333.45 118.5,-334.92 118.5,-336.73' fill='none' stroke='orange'/>
+<text fill='orange' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='153' y='-318.3'>scratch</text>
+</g>
+
+<g class='node' id='node10'>
+<title>p_gtkwave_scratch</title>
+<path d='M85.5,-264.73C85.5,-266.53 70.04,-268 51,-268 31.96,-268 16.5,-266.53 16.5,-264.73 16.5,-264.73 16.5,-235.27 16.5,-235.27 16.5,-233.47 31.96,-232 51,-232 70.04,-232 85.5,-233.47 85.5,-235.27 85.5,-235.27 85.5,-264.73 85.5,-264.73' fill='none' stroke='grey'/>
+<path d='M85.5,-264.73C85.5,-262.92 70.04,-261.45 51,-261.45 31.96,-261.45 16.5,-262.92 16.5,-264.73' fill='none' stroke='grey'/>
+<text fill='grey' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='51' y='-246.3'>scratch</text>
+</g>
+
+<g class='edge' id='edge9'>
+<title>scratch&#45;&gt;p_gtkwave_scratch</title>
+<path d='M128.83,-304.41C115.33,-295.15 98.34,-283.49 83.67,-273.42' fill='none' stroke='black'/>
+<polygon fill='black' points='85.58,-270.49 75.35,-267.71 81.62,-276.26 85.58,-270.49' stroke='black'/>
+</g>
+
+<g class='node' id='node14'>
+<title>p_verilator_scratch</title>
+<path d='M289.5,-264.73C289.5,-266.53 274.04,-268 255,-268 235.96,-268 220.5,-266.53 220.5,-264.73 220.5,-264.73 220.5,-235.27 220.5,-235.27 220.5,-233.47 235.96,-232 255,-232 274.04,-232 289.5,-233.47 289.5,-235.27 289.5,-235.27 289.5,-264.73 289.5,-264.73' fill='none' stroke='grey'/>
+<path d='M289.5,-264.73C289.5,-262.92 274.04,-261.45 255,-261.45 235.96,-261.45 220.5,-262.92 220.5,-264.73' fill='none' stroke='grey'/>
+<text fill='grey' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='255' y='-246.3'>scratch</text>
+</g>
+
+<g class='edge' id='edge15'>
+<title>scratch&#45;&gt;p_verilator_scratch</title>
+<path d='M177.17,-304.41C190.67,-295.15 207.66,-283.49 222.33,-273.42' fill='none' stroke='black'/>
+<polygon fill='black' points='224.38,-276.26 230.65,-267.71 220.42,-270.49 224.38,-276.26' stroke='black'/>
+</g>
+
+<g class='edge' id='edge8'>
+<title>p_gtkwave_build:build&#45;&gt;d_gtkwave</title>
+<path d='M139.87,-231.7C135.15,-223.64 129.44,-213.89 124.22,-204.98' fill='none' stroke='black'/>
+<polygon fill='black' points='127.09,-202.96 119.02,-196.1 121.05,-206.5 127.09,-202.96' stroke='black'/>
+</g>
+
+<g class='edge' id='edge10'>
+<title>p_gtkwave_scratch&#45;&gt;d_gtkwave</title>
+<path d='M65.34,-231.7C72.29,-223.3 80.77,-213.07 88.4,-203.86' fill='none' stroke='black'/>
+<polygon fill='black' points='91.14,-206.04 94.83,-196.1 85.75,-201.57 91.14,-206.04' stroke='black'/>
+</g>
+
+<g class='edge' id='edge17'>
+<title>p_gtkwave_scratch&#45;&gt;pkg:gtkwave</title>
+<path d='M51.36,-231.9C52.14,-213.71 54.57,-184.27 62,-160 64.81,-150.82 69.14,-141.31 73.52,-132.93' fill='none' stroke='black' stroke-dasharray='5,2'/>
+<polygon fill='black' points='76.67,-134.47 78.4,-124.02 70.53,-131.11 76.67,-134.47' stroke='black'/>
+</g>
+
+<g class='edge' id='edge12'>
+<title>p_verilator_build:build&#45;&gt;d_verilator</title>
+<path d='M354,-231.7C354,-223.98 354,-214.71 354,-206.11' fill='none' stroke='black'/>
+<polygon fill='black' points='357.5,-206.1 354,-196.1 350.5,-206.1 357.5,-206.1' stroke='black'/>
+</g>
+
+<g class='edge' id='edge14'>
+<title>p_verilator_build:base&#45;&gt;d_verilator</title>
+<path d='M437.37,-232.05C423.02,-222.92 405.12,-211.53 389.59,-201.65' fill='none' stroke='black'/>
+<polygon fill='black' points='391.08,-198.45 380.76,-196.03 387.32,-204.35 391.08,-198.45' stroke='black'/>
+</g>
+
+<g class='edge' id='edge18'>
+<title>p_verilator_build:base&#45;&gt;verilator</title>
+<path d='M459.3,-231.87C452.62,-207.56 440.33,-162.82 432.42,-134.01' fill='none' stroke='black' stroke-dasharray='5,2'/>
+<polygon fill='black' points='435.74,-132.91 429.72,-124.19 428.99,-134.76 435.74,-132.91' stroke='black'/>
+</g>
+
+<g class='edge' id='edge16'>
+<title>p_verilator_scratch&#45;&gt;d_verilator</title>
+<path d='M278.46,-232.41C291.25,-223.37 307.27,-212.04 321.27,-202.14' fill='none' stroke='black'/>
+<polygon fill='black' points='323.53,-204.83 329.67,-196.2 319.49,-199.12 323.53,-204.83' stroke='black'/>
+</g>
+
+<g class='edge' id='edge19'>
+<title>p_verilator_scratch&#45;&gt;pkg:verilator</title>
+<path d='M258.98,-231.87C264.63,-207.56 275.03,-162.82 281.72,-134.01' fill='none' stroke='black' stroke-dasharray='5,2'/>
+<polygon fill='black' points='285.15,-134.72 284.01,-124.19 278.33,-133.14 285.15,-134.72' stroke='black'/>
+</g>
+</g>
+</svg>
