@@ -17,14 +17,14 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian-buster'
+ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
 
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/pkg:verilator AS pkg-verilator
+FROM $REGISTRY/pkg/verilator AS pkg-verilator
 
-FROM $REGISTRY/ghdl:llvm AS base
+FROM $REGISTRY/ghdl/llvm AS base
 
 COPY --from=pkg-verilator /verilator /
 
@@ -32,5 +32,6 @@ RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     perl \
     python3-pip \
+    make \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*

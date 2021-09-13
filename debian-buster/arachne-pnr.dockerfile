@@ -17,14 +17,14 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian-buster'
+ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
 
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/pkg:icestorm AS pkg-icestorm
+FROM $REGISTRY/pkg/icestorm AS pkg-icestorm
 
-FROM $REGISTRY/build:build AS build
+FROM $REGISTRY/build/build AS build
 
 COPY --from=pkg-icestorm /icestorm/usr/local/share/icebox /usr/local/share/icebox
 
@@ -40,5 +40,5 @@ COPY --from=build /opt/arachne-pnr /arachne-pnr
 
 #---
 
-FROM $REGISTRY/build:base
+FROM $REGISTRY/build/base
 COPY --from=build /opt/arachne-pnr /

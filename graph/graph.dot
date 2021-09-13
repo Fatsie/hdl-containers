@@ -36,62 +36,78 @@ digraph G {
   # Images
 
   { node [shape=cylinder]
-    "build:base"
-    "build:build"
-    "build:dev"
+    "build/base"
+    "build/build"
+    "build/dev"
     { node [color=limegreen, fontcolor=limegreen]
       "apicula"
       "arachne-pnr"
       "ghdl"
-      "ghdl:llvm"
-      "ghdl:yosys"
+      "ghdl/llvm"
+      "ghdl/yosys"
       "icestorm"
+      "iverilog"
       "klayout"
-      "nextpnr:generic"
-      "nextpnr:ice40"
-      "nextpnr:icestorm"
-      "nextpnr:ecp5"
-      "nextpnr:prjtrellis"
+      "magic"
+      "netgen"
+      "nextpnr/generic"
+      "nextpnr/ice40"
+      "nextpnr/nexus"
+      "nextpnr/ecp5"
       "nextpnr"
+      "openfpgaloader"
+      "prjoxide"
       "prjtrellis"
       "verilator"
+      "vtr"
       "yosys"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
-      "pkg:apicula"
-      "pkg:arachne-pnr"
-      "pkg:boolector"
-      "pkg:cvc4"
-      "pkg:ghdl"
-      "pkg:ghdl-llvm"
-      "pkg:ghdl-yosys-plugin"
-      "pkg:gtkwave"
-      "pkg:icestorm"
-      "pkg:klayout"
-      "pkg:nextpnr-ice40"
-      "pkg:nextpnr-ecp5"
-      "pkg:nextpnr-generic"
-      "pkg:osvb"
-      "pkg:prjtrellis"
-      "pkg:superprove"
-      "pkg:symbiyosys"
-      "pkg:yices2"
-      "pkg:yosys"
-      "pkg:verilator"
-      "pkg:z3"
+      "pkg/apicula"
+      "pkg/arachne-pnr"
+      "pkg/boolector"
+      "pkg/cvc"
+      "pkg/ghdl"
+      "pkg/ghdl/llvm"
+      "pkg/ghdl-yosys-plugin"
+      "pkg/gtkwave"
+      "pkg/icestorm"
+      "pkg/iverilog"
+      "pkg/klayout"
+      "pkg/magic"
+      "pkg/netgen"
+      "pkg/nextpnr/ice40"
+      "pkg/nextpnr/nexus"
+      "pkg/nextpnr/ecp5"
+      "pkg/nextpnr/generic"
+      "pkg/openfpgaloader"
+      "pkg/osvb"
+      "pkg/pono"
+      "pkg/prjoxide"
+      "pkg/prjtrellis"
+      "pkg/superprove"
+      "pkg/symbiyosys"
+      "pkg/yices2"
+      "pkg/yosys"
+      "pkg/verilator"
+      "pkg/vtr"
+      "pkg/z3"
     }
     { node [color=brown, fontcolor=brown]
-      "formal:min"
+      "formal/min"
       "formal"
-      "formal:all"
+      "formal/all"
       "impl"
+      "nextpnr/icestorm"
+      "nextpnr/prjoxide"
+      "nextpnr/prjtrellis"
       "prog"
       "sim"
-      "sim:osvb"
-      "sim:scypy-slim"
-      "sim:scypy"
-      "sim:octave-slim"
-      "sim:octave"
+      "sim/osvb"
+      "sim/scypy-slim"
+      "sim/scypy"
+      "sim/octave-slim"
+      "sim/octave"
     }
   }
 
@@ -100,8 +116,8 @@ digraph G {
   { node [shape=cylinder, color=orange, fontcolor=orange] rank=same
     "BASE IMAGE"
     "scratch"
-    "ghdl/pkg:buster-mcode"
-    "ghdl/pkg:buster-llvm-7"
+    "ghdl/pkg:bullseye-mcode"
+    "ghdl/pkg:bullseye-llvm-9"
   }
 
   # Dependencies
@@ -110,38 +126,38 @@ digraph G {
 
   {
     "scratch"
-    "ghdl/pkg:buster-mcode"
-    "ghdl/pkg:buster-llvm-7"
-    "build:base"
-    "build:build"
+    "ghdl/pkg:bullseye-mcode"
+    "ghdl/pkg:bullseye-llvm-9"
+    "build/base"
+    "build/build"
   } -> m_synth;
 
   {
-    "build:build"
-    "build:base"
+    "build/build"
+    "build/base"
     "scratch"
-    "ghdl:llvm"
+    "ghdl/llvm"
   } -> m_sim;
 
   {
     "scratch"
-    "build:build"
-    "build:base"
-    "build:dev"
-    "ghdl:yosys"
+    "build/build"
+    "build/base"
+    "build/dev"
+    "ghdl/yosys"
   } -> m_impl;
 
   {
     "scratch"
-    "build:base"
-    "build:build"
-    "ghdl:yosys"
+    "build/base"
+    "build/build"
+    "ghdl/yosys"
    } -> m_formal;
 
   {
     "scratch"
-    "build:build"
-    "build:base"
+    "build/build"
+    "build/base"
   } -> m_asic;
 
   # Generated images
@@ -149,9 +165,9 @@ digraph G {
   subgraph cluster_base {
     label = "Base";
     m_base -> {
-      "build:base"
-      "build:build"
-      "build:dev"
+      "build/base"
+      "build/build"
+      "build/dev"
     } [style=dotted];
   }
 
@@ -159,12 +175,12 @@ digraph G {
     label = "Synth";
     m_synth -> {
       "ghdl"
-      "ghdl:llvm"
-      "pkg:ghdl"
-      "pkg:ghdl-llvm"
-      "pkg:ghdl-yosys-plugin"
-      "ghdl:yosys"
-      "pkg:yosys"
+      "ghdl/llvm"
+      "pkg/ghdl"
+      "pkg/ghdl/llvm"
+      "pkg/ghdl-yosys-plugin"
+      "ghdl/yosys"
+      "pkg/yosys"
       "yosys"
     }
   }
@@ -173,15 +189,17 @@ digraph G {
     label = "Sim";
     m_sim -> {
       "sim"
-      "sim:osvb"
-      "sim:scypy-slim"
-      "sim:scypy"
-      "sim:octave-slim"
-      "sim:octave"
+      "sim/osvb"
+      "sim/scypy-slim"
+      "sim/scypy"
+      "sim/octave-slim"
+      "sim/octave"
+      "iverilog"
       "verilator"
-      "pkg:osvb"
-      "pkg:verilator"
-      "pkg:gtkwave"
+      "pkg/osvb"
+      "pkg/iverilog"
+      "pkg/verilator"
+      "pkg/gtkwave"
     };
   }
 
@@ -189,39 +207,49 @@ digraph G {
     label = "Impl";
     m_impl -> {
       "apicula"
-      "pkg:apicula"
+      "pkg/apicula"
       "arachne-pnr"
-      "pkg:arachne-pnr"
+      "pkg/arachne-pnr"
       "icestorm"
-      "pkg:icestorm"
-      "prjtrellis"
-      "pkg:prjtrellis"
+      "pkg/icestorm"
       "prog"
       "impl"
-      "nextpnr:generic"
-      "nextpnr:ice40"
-      "nextpnr:icestorm"
-      "nextpnr:ecp5"
-      "nextpnr:prjtrellis"
+      "nextpnr/generic"
+      "nextpnr/ice40"
+      "nextpnr/icestorm"
+      "nextpnr/nexus"
+      "nextpnr/prjoxide"
+      "nextpnr/ecp5"
+      "nextpnr/prjtrellis"
       "nextpnr"
-      "pkg:nextpnr-generic"
-      "pkg:nextpnr-ice40"
-      "pkg:nextpnr-ecp5"
+      "pkg/nextpnr/generic"
+      "pkg/nextpnr/ice40"
+      "pkg/nextpnr/nexus"
+      "pkg/nextpnr/ecp5"
+      "openfpgaloader"
+      "pkg/openfpgaloader"
+      "prjoxide"
+      "pkg/prjoxide"
+      "prjtrellis"
+      "pkg/prjtrellis"
+      "vtr"
+      "pkg/vtr"
     }
   }
 
   subgraph cluster_formal {
     label = "Formal";
     m_formal -> {
-      "pkg:symbiyosys"
-      "pkg:boolector"
-      "pkg:cvc4"
-      "pkg:superprove"
-      "pkg:yices2"
-      "pkg:z3"
-      "formal:min"
+      "pkg/symbiyosys"
+      "pkg/boolector"
+      "pkg/cvc"
+      "pkg/pono"
+      "pkg/superprove"
+      "pkg/yices2"
+      "pkg/z3"
+      "formal/min"
       "formal"
-      "formal:all"
+      "formal/all"
     }
   }
 
@@ -229,7 +257,11 @@ digraph G {
     label = "ASIC";
     m_asic -> {
       "klayout"
-      "pkg:klayout"
+      "magic"
+      "netgen"
+      "pkg/klayout"
+      "pkg/magic"
+      "pkg/netgen"
     };
   }
 

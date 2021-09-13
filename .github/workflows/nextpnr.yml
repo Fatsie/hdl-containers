@@ -40,41 +40,43 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - debian-buster
+        include:
+
+          # Debian Buster
+          - { os: debian/buster, arch: amd64 }
+
+          # Debian Bullseye
+          - { os: debian/bullseye, arch: amd64 }
+
+    env:
+      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2
       with:
         submodules: recursive
 
-    - run: ./.github/setup.sh
+    - run: ./utils/setup.sh
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        build:nextpnr-base
-        build:nextpnr-build
+        build/nextpnr/base
+        build/nextpnr/build
 
-    - name: Login to ghcr.io
+    - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      uses: docker/login-action@v1
+      uses: ./utils/registry-login
       with:
-        registry: ghcr.io
-        username: gha
-        password: ${{ github.token }}
-
-    - name: Login to docker.io
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        cmd: |
+          echo '${{ secrets.GCR_JSON_KEY }}' | docker login gcr.io -u _json_key --password-stdin
+          echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
+          echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        build:nextpnr-base
-        build:nextpnr-build
+        build/nextpnr/base
+        build/nextpnr/build
 
 
   nextpnr-prjs:
@@ -82,53 +84,60 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 4
       matrix:
-        os:
-          - debian-buster
+        sys:
+
+          # Debian Buster
+          - { os: debian/buster, arch: amd64 }
+
+          # Debian Bullseye
+          - { os: debian/bullseye, arch: amd64 }
+
         task:
           - { arch: ice40, prj: icestorm   }
           - { arch: ecp5,  prj: prjtrellis }
-    name: '[${{ matrix.os }}] nextpnr · ${{ matrix.task.arch }} ${{ matrix.task.prj }}'
+          - { arch: nexus, prj: prjoxide   }
+
+        exclude:
+          - sys: { os: debian/buster, arch: amd64 }
+            task: { arch: nexus, prj: prjoxide }
+
+    name: '[${{ matrix.sys.os }}|${{ matrix.sys.arch }}] nextpnr · ${{ matrix.task.arch }} ${{ matrix.task.prj }}'
+    env:
+      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2
       with:
         submodules: recursive
 
-    - run: ./.github/setup.sh
+    - run: ./utils/setup.sh
 
     - run: >-
-        dockerBuild -c ${{ matrix.os }} -d
-        pkg:nextpnr-${{ matrix.task.arch }}
-        nextpnr:${{ matrix.task.arch }}
-        nextpnr:${{ matrix.task.prj }}
+        dockerBuild -c ${{ matrix.sys.os }} -d
+        pkg/nextpnr/${{ matrix.task.arch }}
+        nextpnr/${{ matrix.task.arch }}
+        nextpnr/${{ matrix.task.prj }}
 
-    - run: dockerTestPkg ${{ matrix.os }} nextpnr-${{ matrix.task.arch }}
-    - run: dockerTest    ${{ matrix.os }} nextpnr:${{ matrix.task.arch }}
-    - run: dockerTest    ${{ matrix.os }} nextpnr:${{ matrix.task.prj }}
+    - run: dockerTestPkg ${{ matrix.sys.os }} nextpnr/${{ matrix.task.arch }}
+    - run: dockerTest    ${{ matrix.sys.os }} nextpnr/${{ matrix.task.arch }}
+    - run: dockerTest    ${{ matrix.sys.os }} nextpnr/${{ matrix.task.prj }}
 
-    - name: Login to ghcr.io
+    - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      uses: docker/login-action@v1
+      uses: ./utils/registry-login
       with:
-        registry: ghcr.io
-        username: gha
-        password: ${{ github.token }}
-
-    - name: Login to docker.io
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        cmd: |
+          echo '${{ secrets.GCR_JSON_KEY }}' | docker login gcr.io -u _json_key --password-stdin
+          echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
+          echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush ${{ matrix.os }}
-        pkg:nextpnr-${{ matrix.task.arch }}
-        nextpnr:${{ matrix.task.arch }}
-        nextpnr:${{ matrix.task.prj }}
+        dockerPush ${{ matrix.sys.os }}
+        pkg/nextpnr/${{ matrix.task.arch }}
+        nextpnr/${{ matrix.task.arch }}
+        nextpnr/${{ matrix.task.prj }}
 
 
   nextpnr:
@@ -137,44 +146,46 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - debian-buster
+        include:
+
+          # Debian Buster
+          - { os: debian/buster, arch: amd64 }
+
+          # Debian Bullseye
+          - { os: debian/bullseye, arch: amd64 }
+
+    env:
+      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2
       with:
         submodules: recursive
 
-    - run: ./.github/setup.sh
+    - run: ./utils/setup.sh
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        pkg:nextpnr-generic
-        nextpnr:generic
+        pkg/nextpnr/generic
+        nextpnr/generic
         nextpnr
 
-    - run: dockerTestPkg ${{ matrix.os }} nextpnr-generic
-    - run: dockerTest    ${{ matrix.os }} nextpnr:generic
+    - run: dockerTestPkg ${{ matrix.os }} nextpnr/generic
+    - run: dockerTest    ${{ matrix.os }} nextpnr/generic
     - run: dockerTest    ${{ matrix.os }} nextpnr
 
-    - name: Login to ghcr.io
+    - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      uses: docker/login-action@v1
+      uses: ./utils/registry-login
       with:
-        registry: ghcr.io
-        username: gha
-        password: ${{ github.token }}
-
-    - name: Login to docker.io
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        cmd: |
+          echo '${{ secrets.GCR_JSON_KEY }}' | docker login gcr.io -u _json_key --password-stdin
+          echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
+          echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        pkg:nextpnr-generic
-        nextpnr:generic
+        pkg/nextpnr/generic
+        nextpnr/generic
         nextpnr

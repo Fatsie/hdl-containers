@@ -17,11 +17,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian-buster'
+ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
+ARG IMAGE="build/base"
 
 #---
 
-FROM $REGISTRY/build:build AS build
+FROM $REGISTRY/build/build AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -49,10 +50,12 @@ COPY --from=build /opt/verilator /verilator
 
 #---
 
-FROM $REGISTRY/build:base
+FROM $REGISTRY/$IMAGE
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    gcc \
+    make \
     perl \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*

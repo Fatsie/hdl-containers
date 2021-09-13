@@ -19,7 +19,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian-buster'
+ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
 ARG IMAGE="sim"
 
 #---
@@ -35,7 +35,7 @@ RUN apt-get update -qq \
     python3-wheel
 
 RUN mkdir /tmp/osvb \
- && git clone -b stable/1.4 --recurse-submodules https://github.com/cocotb/cocotb /tmp/cocotb \
+ && git clone -b master --recurse-submodules https://github.com/cocotb/cocotb /tmp/cocotb \
  && cd /tmp/cocotb \
  && python3 setup.py bdist_wheel \
  && mv dist/*.whl /tmp/osvb/ \
@@ -43,7 +43,7 @@ RUN mkdir /tmp/osvb \
  && cd /tmp/vunit \
  && python3 setup.py bdist_wheel \
  && mv dist/*.whl /tmp/osvb/ \
- && git clone -b master --recurse-submodules https://github.com/osvvm/OsvvmLibraries /tmp/osvb/osvvmlibs
+ && git clone -b 2021.06 --recurse-submodules https://github.com/osvvm/OsvvmLibraries /tmp/osvb/osvvmlibs
 
 #---
 
@@ -53,7 +53,7 @@ COPY --from=build /tmp/osvb/ /osvb/
 #---
 
 # WORKAROUND: this is required because '--mount=' does not support ARGs
-FROM $REGISTRY/pkg:osvb AS pkg-osvb
+FROM $REGISTRY/pkg/osvb AS pkg-osvb
 
 FROM $REGISTRY/$IMAGE
 

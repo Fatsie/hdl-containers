@@ -38,15 +38,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - debian-buster
+        include:
+
+          # Debian Buster
+          - { os: debian/buster, arch: amd64 }
+
+          # Debian Bullseye
+          - { os: debian/bullseye, arch: amd64 }
+
+    env:
+      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2
       with:
         submodules: recursive
 
-    - run: ./.github/setup.sh
+    - run: ./utils/setup.sh
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
@@ -54,20 +62,14 @@ jobs:
 
     - run: dockerTest ${{ matrix.os }} prog
 
-    - name: Login to ghcr.io
+    - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      uses: docker/login-action@v1
+      uses: ./utils/registry-login
       with:
-        registry: ghcr.io
-        username: gha
-        password: ${{ github.token }}
-
-    - name: Login to docker.io
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        cmd: |
+          echo '${{ secrets.GCR_JSON_KEY }}' | docker login gcr.io -u _json_key --password-stdin
+          echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
+          echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-

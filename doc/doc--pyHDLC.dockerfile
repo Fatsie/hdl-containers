@@ -19,7 +19,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM python:slim-buster
+FROM python:slim-bullseye
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -28,4 +28,4 @@ RUN apt-get update -qq \
  && rm -rf /var/lib/apt/lists/*
 
 RUN --mount=type=bind,src=.,target=/tmp/containers/ \
- pip3 install -r /tmp/containers/pyHDLC/requirements.txt
+ pip3 install -r /tmp/containers/utils/pyHDLC/requirements.txt

@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian-buster'
+ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
 
 #---
 
@@ -32,7 +32,7 @@ RUN apt-get update -qq \
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/pkg:ghdl AS pkg-ghdl
+FROM $REGISTRY/pkg/ghdl AS pkg-ghdl
 
 FROM base AS plugin
 
@@ -48,7 +48,7 @@ RUN cp -vr /opt/ghdl/* / \
 
 #---
 
-FROM $REGISTRY/pkg:ghdl AS pkg
+FROM $REGISTRY/pkg/ghdl AS pkg
 
 COPY --from=plugin /opt/ghdl/usr/local/lib/ghdl_yosys.so /ghdl/usr/local/lib/ghdl_yosys.so
 
