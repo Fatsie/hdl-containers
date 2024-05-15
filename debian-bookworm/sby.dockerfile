@@ -1,9 +1,8 @@
-# HDLC yosys
-
 # Authors:
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
+#   Torsten Meissner
 #
 # Copyright Unai Martinez-Corral
 #
@@ -21,38 +20,27 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-makedepends=(
-  bison
-  flex
-  gawk
-  gcc
-  pkg-config
-  zlib1g-dev
-  clang
-  git
-  make
-)
+ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
 
-testdepends=(
-  g++
-)
+#---
 
-build() {
-  git clone https://github.com/YosysHQ/yosys.git /tmp/yosys
-  cd /tmp/yosys
-  make -j $(nproc)
-  make DESTDIR=/opt/yosys install
-}
+FROM $REGISTRY/build/base AS build
 
-runtests() {
-  cd /tmp/yosys
-  make test
-}
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    binutils \
+    g++ \
+    make \
+    python3-distutils \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && update-ca-certificates  \
+ && rm -rf /var/lib/apt/lists/*
 
-depends=(
-  libffi-dev
-  libreadline-dev
-  tcl-dev
-  graphviz
-  xdot
-)
+RUN mkdir /tmp/sby && cd /tmp/sby \
+ && curl -fsSL https://codeload.github.com/YosysHQ/sby/tar.gz/main | tar xzf - --strip-components=1 \
+ && make DESTDIR=/opt/sby install
+
+#---
+
+FROM scratch
+COPY --from=build /opt/sby /sby

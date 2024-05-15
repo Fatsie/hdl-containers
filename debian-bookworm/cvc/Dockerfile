@@ -20,28 +20,27 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: 'symbiyosys'
+ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
 
-on:
-  pull_request:
-  push:
-  schedule:
-    - cron: '0 0 * * 5'
-  workflow_dispatch:
-  repository_dispatch:
-    types: [ symbiyosys ]
+#---
 
-env:
-  DOCKER_BUILDKIT: 1
+FROM $REGISTRY/build/build AS build
 
-jobs:
-  symbiyosys:
-    uses: ./.github/workflows/common.yml
-    with:
-      key: symbiyosys
-      skip-release: ${{ github.event_name == 'pull_request' }}
-    secrets:
-      gcr_token: '${{ secrets.GCR_JSON_KEY }}'
-      gh_token: '${{ github.token }}'
-      docker_user: '${{ secrets.DOCKER_USER }}'
-      docker_pass: '${{ secrets.DOCKER_PASS }}'
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && update-ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+
+#---
+
+FROM scratch AS version
+COPY --from=build /tmp/hdlc.cvc.version /
+
+#---
+
+FROM scratch
+COPY --from=build /opt/cvc /cvc

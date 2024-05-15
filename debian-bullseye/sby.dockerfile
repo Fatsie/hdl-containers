@@ -20,7 +20,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
+ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 #---
 
@@ -36,11 +36,11 @@ RUN apt-get update -qq \
  && update-ca-certificates  \
  && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /tmp/symbiyosys && cd /tmp/symbiyosys \
- && curl -fsSL https://codeload.github.com/YosysHQ/SymbiYosys/tar.gz/master | tar xzf - --strip-components=1 \
- && make DESTDIR=/opt/symbiyosys install
+RUN mkdir /tmp/sby && cd /tmp/sby \
+ && curl -fsSL https://codeload.github.com/YosysHQ/sby/tar.gz/main | tar xzf - --strip-components=1 \
+ && make DESTDIR=/opt/sby install
 
 #---
 
 FROM scratch
-COPY --from=build /opt/symbiyosys /symbiyosys
+COPY --from=build /opt/sby /sby
